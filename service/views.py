@@ -29,3 +29,4 @@ class ContactListViewSet(viewsets.ModelViewSet):
     queryset = ContactList.objects.all()
     serializer_class = ContactListSerializer
     permission_classes = [IsAuthenticated]  # Ensure the user is authenticated to access this viewset
+
