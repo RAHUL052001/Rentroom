@@ -1,5 +1,31 @@
 from django.db import models
 
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+
+
+class AuthUserManager(BaseUserManager):
+    """Custom manager for the AuthUser model.
+    """
+    def create_user(self, email, password=None):
+        user = self.model(email=email)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None):
+        """Create and return a superuser with the given email and password."""
+        return self.create_user(email, password)
+
+
+class authuser(AbstractBaseUser):
+    """Custom user model that uses email as the username field."""
+    email = models.EmailField(unique=True)
+
+    objects = AuthUserManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
 
 class User(models.Model):
     """
