@@ -6,9 +6,20 @@ This module contains serializers for the User, RoomListing, and ContactList mode
 
 from rest_framework import serializers
 
-from .models import User, RoomListing , ContactList
+from .models import User, RoomListing , ContactList ,AuthUser
 
 
+class AuthUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the AuthUser model.
+    This serializer includes all fields from the AuthUser model.
+    """
+    class Meta:
+        """
+        Meta class for AuthUserSerializer.
+        """
+        model = AuthUser
+        fields = '__all__'
 class UserSerializer(serializers.ModelSerializer):
     """
     Serializer for the User model.This serializer includes all fields from the User model.

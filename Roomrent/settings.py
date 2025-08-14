@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'Roomrent.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'postgres',  # Replace with your database name
+            'NAME': 'Rentroom2',  # Replace with your database name
             'USER': 'postgres',      # Replace with your PostgreSQL username
             'PASSWORD': 'Rahul@123',  # Replace with your PostgreSQL password
             'HOST': 'localhost',
@@ -143,4 +143,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL= "service.authuser"  # Specify the custom user model
+
+# Important tip: Always define AUTH_USER_MODEL before your first migrate in a new project.
+# Changing it later is painful.
+
+AUTH_USER_MODEL= "service.AuthUser"  # Specify the custom user model
