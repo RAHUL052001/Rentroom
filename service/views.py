@@ -1,3 +1,4 @@
+from urllib import response
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import RoomListing, ContactList, User,AuthUser
@@ -15,22 +16,21 @@ from rest_framework.decorators import action
 class AuthUserViewSet(viewsets.ModelViewSet):
     print("ooooooooooooooooo")
     queryset = AuthUser.objects.all()
-    # serializer_class = AuthUserSerializer
+    serializer_class = AuthUserSerializer
 
     @action(detail=False, methods=['post'])
     def register(self, request):
-        print("111111111111111111")
         email = request.data.get('email')
         password = request.data.get('password')
 
         if not email or not password:
-            return Response({"error": "Email and password required"}, status=400)
+            return response({"error": "Email and password required"}, status=400)
 
         # ✅ This ensures password hashing happens
         print("222222222222222222222222")
         user = AuthUser.AuthUserManager.create_user(email=email, password=password)
 
-        return Response({"message": "User created", "email": user.email}, status=201)
+        return response({"message": "User created", "email": user.email}, status=201)
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
     

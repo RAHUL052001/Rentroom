@@ -10,16 +10,31 @@ from .models import User, RoomListing , ContactList ,AuthUser
 
 
 class AuthUserSerializer(serializers.ModelSerializer):
-    """
-    Serializer for the AuthUser model.
-    This serializer includes all fields from the AuthUser model.
-    """
     class Meta:
-        """
-        Meta class for AuthUserSerializer.
-        """
         model = AuthUser
-        fields = '__all__'
+        fields = ["id", "email", "password", "is_active", "is_staff"]  
+        extra_kwargs = {
+            "password": {"write_only": True}  # don't return password in API response
+        }
+
+    def create(self, validated_data):
+        password = validated_data.pop("password", None)
+        user = AuthUser(**validated_data)
+        print(password)
+        if password:
+            user.set_password(password)  # hash password
+        user.save()
+        return user
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop("password", None)
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        if password:
+            instance.set_password(password)  # hash on update
+        instance.save()
+        return instance
+
 class UserSerializer(serializers.ModelSerializer):
     """
     Serializer for the User model.This serializer includes all fields from the User model.

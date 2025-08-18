@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 
 class AuthUserManager(BaseUserManager):
-    print("33333333333333333333333333333333333333333")
     def create_user(self, email, password=None):
         if not email:
             raise ValueError("Users must have an email address")
@@ -22,7 +21,6 @@ class AuthUserManager(BaseUserManager):
         return user
 
 class AuthUser(AbstractBaseUser, PermissionsMixin):
-    print("uuuuuuuuuuuuuuuuuu")
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
