@@ -14,7 +14,6 @@ from rest_framework.decorators import action
 
 
 class AuthUserViewSet(viewsets.ModelViewSet):
-    print("ooooooooooooooooo")
     queryset = AuthUser.objects.all()
     serializer_class = AuthUserSerializer
 
@@ -26,8 +25,7 @@ class AuthUserViewSet(viewsets.ModelViewSet):
         if not email or not password:
             return response({"error": "Email and password required"}, status=400)
 
-        # ✅ This ensures password hashing happens
-        print("222222222222222222222222")
+        # ✅ This ensures password hashing happen
         user = AuthUser.AuthUserManager.create_user(email=email, password=password)
 
         return response({"message": "User created", "email": user.email}, status=201)
