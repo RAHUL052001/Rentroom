@@ -41,6 +41,15 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]  # Ensure the user is authenticated to access this viewset
 
+    @action(detail=False, methods=["get"], url_path="check-user/(?P<username>[^/.]+)")
+    def check_user(self, request, username=None):
+        try:
+            user = User.objects.get(username=username)
+            serializer = UserSerializer(user)
+            return response(serializer.data)
+        except User.DoesNotExist:
+            return response({"error": "User not found"}, status=404)
+
 class RoomListingViewSet(viewsets.ModelViewSet):
     """
     A viewset for viewing and editing RoomListing instances.

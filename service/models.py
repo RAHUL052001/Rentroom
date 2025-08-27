@@ -42,7 +42,6 @@ class User(models.Model):
     Is_owner = models.BooleanField(default=False,null=False, blank=False)  # True if the user is a room owner
     first_name = models.CharField(max_length=100,null=False, blank=False)
     last_name = models.CharField(max_length=100,null=False, blank=False)
-    password = models.CharField(max_length=100,null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True,null=False, blank=False)
 
     def __str__(self):
