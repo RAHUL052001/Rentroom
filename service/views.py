@@ -5,6 +5,9 @@ from .models import RoomListing, ContactList, User,AuthUser
 from .serializers import UserSerializer, ContactListSerializer , AuthUserSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import status
+
 
 
 
@@ -29,6 +32,22 @@ class AuthUserViewSet(viewsets.ModelViewSet):
         user = AuthUser.AuthUserManager.create_user(email=email, password=password)
 
         return response({"message": "User created", "email": user.email}, status=201)
+    
+    @action(detail=False, methods=["get"], url_path=r"check-user/(?P<user_id>\d+)")
+    def check_user(self, request, user_id=None):
+        """
+        Check if a user exists by ID.
+        URL: /api/users/check-user/<user_id>/
+        """
+        try:
+            user = AuthUser.objects.get(pk=user_id)
+            serializer = self.get_serializer(user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response(
+                {"error": "User not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
     
@@ -39,16 +58,24 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]  # Ensure the user is authenticated to access this viewset
+    permission_classes = [IsAuthenticated]
 
-    @action(detail=False, methods=["get"], url_path="check-user/(?P<username>[^/.]+)")
-    def check_user(self, request, username=None):
+    @action(detail=False, methods=["get"], url_path=r"check-user/(?P<user_id>\d+)")
+    def check_user(self, request, user_id=None):
+        """
+        Check if a user exists by ID.
+        URL: /api/users/check-user/<user_id>/
+        """
         try:
-            user = User.objects.get(username=username)
-            serializer = UserSerializer(user)
-            return response(serializer.data)
+            user = User.objects.get(pk=user_id)
+            serializer = self.get_serializer(user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
-            return response({"error": "User not found"}, status=404)
+            return Response(
+                {"error": "User not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
 
 class RoomListingViewSet(viewsets.ModelViewSet):
     """
