@@ -60,6 +60,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware"
 ]
 
+
 ROOT_URLCONF = 'Roomrent.urls'
 
 TEMPLATES = [
