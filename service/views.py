@@ -60,21 +60,20 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
-    @action(detail=False, methods=["get"], url_path=r"check-user/(?P<user_id>\d+)")
-    def check_user(self, request, user_id=None):
-        """
-        Check if a user exists by ID.
-        URL: /api/users/check-user/<user_id>/
-        """
+    @action(detail=False, methods=["get"], url_path="check-user")
+    def check_user(self, request):
+        email = request.query_params.get("email")
+        if not email:
+            return Response({"error": "email is required"}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
-            user = User.objects.get(pk=user_id)
+            user = User.objects.get(email=email)
             serializer = self.get_serializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except User.DoesNotExist:
-            return Response(
-                {"error": "User not found"},
-                status=status.HTTP_404_NOT_FOUND
-            )
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+     
 
 
 class RoomListingViewSet(viewsets.ModelViewSet):

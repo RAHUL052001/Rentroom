@@ -37,7 +37,7 @@ class User(models.Model):
     """
     User model for MongoDB using mongoengine.
     """
-    username = models.CharField(max_length=100,null=False, blank=False)
+    phone_no = models.CharField(max_length=100,null=False, blank=False)
     email = models.EmailField(unique=True,null=False, blank=False)      
     Is_owner = models.BooleanField(default=False,null=False, blank=False)  # True if the user is a room owner
     first_name = models.CharField(max_length=100,null=False, blank=False)
@@ -64,6 +64,8 @@ class RoomListing(models.Model):
 
     def __str__(self):
         return  str(self.room_name)
+    
+
     
 class ContactList(models.Model):
     """
