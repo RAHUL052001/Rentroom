@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +27,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
 
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Application definition
@@ -54,6 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware"
 ]
 
 ROOT_URLCONF = 'Roomrent.urls'
@@ -87,16 +91,28 @@ WSGI_APPLICATION = 'Roomrent.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': 'Rentroom2',  # Replace with your database name
+#             'USER': 'postgres',      # Replace with your PostgreSQL username
+#             'PASSWORD': 'Rahul@123',  # Replace with your PostgreSQL password
+#             'HOST': 'localhost',
+#             'PORT': '5432',
+#         }
+#     }
+
+
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'Rentroom2',  # Replace with your database name
-            'USER': 'postgres',      # Replace with your PostgreSQL username
-            'PASSWORD': 'Rahul@123',  # Replace with your PostgreSQL password
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rentroom',
+        'USER': 'rentroom_user',
+        'PASSWORD': 'sE0TncQyjzutjpif03TxzOhcEg5xlOsy',
+        'HOST': 'dpg-d2quls6mcj7s73ck0j9g-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
+}
 
 
 # Password validation
