@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',  # JWT authentication for REST framework
     'service',  # Your app for handling room rentals 
     'corsheaders' ,  # For handling CORS (Cross-Origin Resource Sharing)
+    'storages',  # For handling storage backends like AWS S3
 ]
 
 MIDDLEWARE = [
@@ -170,3 +171,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Changing it later is painful.
 
 AUTH_USER_MODEL= "service.AuthUser"  # Specify the custom user model
+
+
+
+
+# AWS bucket
+
+
+AWS_ACCESS_KEY_ID = 'AKIAUALYGZ2GPWYQ53NT'
+AWS_SECRET_ACCESS_KEY = 'MPWO/IXDKjaiZLMo9BTJmjeb6dIqCe/uhW9fVEta'
+AWS_STORAGE_BUCKET_NAME = 'rentroom-bucket-v1'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_REGION_NAME = 'ap-south-1'  # e.g., us-east-1
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL =  None
+AWS_S3_VERIFY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
