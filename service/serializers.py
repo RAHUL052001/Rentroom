@@ -8,7 +8,6 @@ from rest_framework import serializers
 
 from .models import User, RoomListing , ContactList ,AuthUser
 
-from .models import Image
 
 class AuthUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -68,12 +67,3 @@ class ContactListSerializer(serializers.ModelSerializer):
 
 
 
-class ImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Image
-        fields = ["id", "user", "image", "uploaded_at", "image_url"]
-
-    image_url = serializers.SerializerMethodField()
-
-    def get_image_url(self, obj):
-        return obj.image.url  # S3 public/presigned link
