@@ -61,6 +61,7 @@ class RoomListing(models.Model):
     room_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)  # Price per night
     room_location =models.CharField(max_length=255, null=False, blank=False)  # Location of the room
     created_at = models.DateTimeField(auto_now_add=True, null=False, blank=False)  # Timestamp when the room was listed
+    is_flagged = models.BooleanField(default=False, help_text="Admin can flag/unflag this listing")
 
     def __str__(self):
         return  str(self.room_name)

@@ -83,9 +83,14 @@ from .serializers import RoomListingSerializer
 from rest_framework import serializers
 
 class RoomListingViewSet(viewsets.ModelViewSet):
-    queryset = RoomListing.objects.all().order_by("-created_at")
     serializer_class = RoomListingSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        """
+        Only return flagged room listings (is_flagged=True)
+        """
+        return RoomListing.objects.filter(is_flagged=True).order_by("-created_at")
 
     def perform_create(self, serializer):
         user_id = self.request.data.get("room_owner")  # coming from frontend
@@ -99,6 +104,7 @@ class RoomListingViewSet(viewsets.ModelViewSet):
             raise serializers.ValidationError({"room_owner": "Invalid user ID."})
 
         serializer.save(room_owner=user_instance)
+
 
 
 class ContactListViewSet(viewsets.ModelViewSet):
