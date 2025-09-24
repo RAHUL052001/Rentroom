@@ -57,7 +57,7 @@ class RoomListing(models.Model):
     room_capacity = models.IntegerField(null=False, blank=False)  # Number of people the room can accommodate
     room_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)  # Owner of the room
     room_description = models.TextField(null=False, blank=False)  # Detailed description of the room
-    room_image = models.CharField(max_length=255, null=False, blank=False)  # URL or path to the room image
+    room_image = models.TextField(null=False, blank=False) 
     room_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)  # Price per night
     room_location =models.CharField(max_length=255, null=False, blank=False)  # Location of the room
     created_at = models.DateTimeField(auto_now_add=True, null=False, blank=False)  # Timestamp when the room was listed
