@@ -58,7 +58,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     @action(detail=False, methods=["get"], url_path="check-user")
     def check_user(self, request):
@@ -90,7 +90,7 @@ class RoomListingViewSet(viewsets.ModelViewSet):
         """
         Only return flagged room listings (is_flagged=True)
         """
-        return RoomListing.objects.filter(is_flagged=True).order_by("-created_at")
+        return RoomListing.objects.filter(is_flagged=False).order_by("-created_at")
 
     def perform_create(self, serializer):
         user_id = self.request.data.get("room_owner")  # coming from frontend
