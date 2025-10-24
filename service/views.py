@@ -82,7 +82,6 @@ from .serializers import RoomListingSerializer
 
 from rest_framework import serializers
 
-
 class RoomListingViewSet(viewsets.ModelViewSet):
     serializer_class = RoomListingSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
