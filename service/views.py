@@ -11,7 +11,7 @@ from rest_framework import status
 
 
 
-# Create your views here. for the new functionalities
+# Create your views here. 
 
 
 
