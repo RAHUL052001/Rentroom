@@ -11,7 +11,7 @@ from rest_framework import status
 
 
 
-# Create your views here.
+# Create your views here. 
 
 
 
@@ -58,7 +58,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     @action(detail=False, methods=["get"], url_path="check-user")
     def check_user(self, request):
