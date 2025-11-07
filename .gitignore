@@ -3,10 +3,6 @@
 env
 .env.*
 *.env
-<<<<<<< HEAD
-*.pyc
-__pycache__/
-=======
 
 *.pyc
 __pycache__/
@@ -17,4 +13,3 @@ __pycache__/
 
 # Local database
 db.sqlite3
->>>>>>> 7f7b7fbaabddcf62225ad1f78bfaea392ce25374
