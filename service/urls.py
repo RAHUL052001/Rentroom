@@ -3,8 +3,6 @@ from .views import UserViewSet ,RoomListingViewSet ,ContactListViewSet  ,AuthUse
 from rest_framework.routers import DefaultRouter
 
 
-
-
 router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
 router.register(r'roomlistings', RoomListingViewSet, basename='roomlisting')
