@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'service',  # Your app for handling room rentals 
     'corsheaders' ,  # For handling CORS (Cross-Origin Resource Sharing)
     'storages',  # For handling storage backends like AWS S3
+    'CasePlatform',  # Your app for case management
 ]
 
 MIDDLEWARE = [
