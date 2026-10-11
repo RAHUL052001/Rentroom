@@ -32,21 +32,6 @@ class INP_CASEViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             case = serializer.save()
 
-            # 2. Create Initial Milestone
-            # milestone_data = {
-            #     "case_id": case.Row_id,
-            #     "milestone_code": "MS01",
-            #     "milestone_status": "COMPLETED",
-            #     "milestone_name": "Case Created",
-            #     "milestone_id": "case.Row_id",
-            # }
-
-            milestone_serializer = INP_MILESTONESerializer(
-                data=milestone_data
-            )
-
-            milestone_serializer.is_valid(raise_exception=True)
-            milestone_serializer.save()
 
         # Return Case response
         return Response(
