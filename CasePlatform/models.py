@@ -12,6 +12,7 @@ class INP_CASE_META(models.Model):
     case_type = models.CharField(max_length=100, null=False, blank=False)
     issue_code = models.CharField(max_length=100, null=False, blank=False)
     issue_detail = models.TextField(null=False, blank=False)
+    Parent=models.CharField(max_length=100, null=True, blank=True)
     priority = models.CharField(max_length=100, null=False, blank=False)
     sla_hours = models.IntegerField(null=False, blank=False)
     ticket_type = models.CharField(max_length=100, null=False, blank=False)
@@ -51,6 +52,9 @@ class INP_CASE(models.Model):
     meta_id = models.ForeignKey(INP_CASE_META, on_delete=models.CASCADE, null=False, blank=False)
     customer_id = models.CharField(max_length=15, null=False, blank=False) # Assuming you have a phone field in your User model
     lob = models.CharField(max_length=100, null=False, blank=False)
+    Ticket_type = models.CharField(max_length=100, default='TT')
+    sub_type = models.CharField(max_length=100, default='ST')
+    sub_sub_type = models.CharField(max_length=100, default='SST')
     case_type = models.CharField(max_length=100, null=False, blank=False)
     issue_code = models.CharField(max_length=100, null=False, blank=False)
     issue_detail = models.TextField(null=False, blank=False)
