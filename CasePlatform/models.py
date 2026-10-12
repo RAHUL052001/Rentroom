@@ -47,6 +47,7 @@ class INP_CASE_META(models.Model):
 # created_at
 # updated_at
 
+
 class INP_CASE(models.Model):
     Row_id = models.AutoField(primary_key=True)
     meta_id = models.ForeignKey(INP_CASE_META, on_delete=models.CASCADE, null=False, blank=False)
