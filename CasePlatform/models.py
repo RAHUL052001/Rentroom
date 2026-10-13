@@ -44,9 +44,8 @@ class INP_CASE_META(models.Model):
 # rule_id
 # rule_version
 # is_active
-# created_at
+# created_atz
 # updated_at
-
 
 class INP_CASE(models.Model):
     Row_id = models.AutoField(primary_key=True)
